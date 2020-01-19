@@ -8,12 +8,15 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/crowdsale/distribution/RefundablePostDeliveryCrowdsale.sol";
 
 // @TODO: Inherit the crowdsale contracts
-contract PupperCoinSale is {
+contract PupperCoinSale is Crowdsale, MintedCrowdsale {
 
     constructor(
-        // @TODO: Fill in the constructor parameters!
+        uint rate, //rate in TKNbits
+        uint public goal, //token sale goal
+        address payable wallet, //sale bene
+        PupperCoin token // the PupperCoin that the token sale will work with
     )
-        // @TODO: Pass the constructor parameters to the crowdsale contracts.
+        Crowdsale(rate, goal, wallet, token)
         public
     {
         // constructor can stay empty
@@ -26,7 +29,9 @@ contract PupperCoinSaleDeployer {
     address public token_address;
 
     constructor(
-        // @TODO: Fill in the constructor parameters!
+        string memory name,
+        string memory symbol,
+        address payable wallet // this address receives the ETH from the sale
     )
         public
     {
